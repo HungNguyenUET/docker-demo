@@ -1,0 +1,16 @@
+services:
+  mysql:
+    container_name: mysql-demo
+    build:
+      context: ./mysql-demo
+      args:
+        - MYSQL_DATABASE=${MYSQL_DATABASE}
+        - MYSQL_USER=${MYSQL_USER}
+        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    ports:
+      - "${MYSQL_PORT}:3306"
+    volumes:
+      - ./mysql-demo/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./mysql-demo/mysql-data:/var/lib/mysql
+
